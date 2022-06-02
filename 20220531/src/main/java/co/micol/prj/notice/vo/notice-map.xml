@@ -25,7 +25,7 @@
 	
 	<select id="noticeSelect" resultMap="noticeMap">
 		SELECT * FROM NOTICE
-		WHERE NOTICE_ID = #{noticeID}
+		WHERE NOTICE_ID = #{noticeId}
 		
 		
 	</select>
@@ -36,17 +36,19 @@
 					ELSE 1 END AS ID FROM NOTICE
 		</selectKey>
 	
-		INSERT INTO NOTICE
-		VALUES(#{noticeId},#{noticeName},#{noticeTitle},#{noticeContents},
-		#{noticeDate},0,#{noticeAttech},#{noticeDir})
+		INSERT INTO NOTICE(notice_id,notice_name,notice_title,notice_contents,notice_date,notice_hit ,notice_attech,
+		notice_dir)
+		
+		VALUES
+			(#{noticeId},#{noticeName},  #{noticeTitle}, #{noticeContents},#{noticeDate}, 0,#{noticeAttech},#{noticeDir})
 	</insert>
 
 	<update id="noticeUpdate" parameterType="co.micol.prj.notice.vo.NoticeVO">
-		update notice
+		UPDATE NOTICE
 		<set>
 			<if test="noticeName !=null" > NOTICE_NAME = #{noticeName}, </if>
 			<if test="noticeTitle !=null" > NOTICE_TITLE = #{noticeTitle}, </if>
-			<if test="noticeContentes !=null"> NOTICE_CONTENTS = #{noticeContentes}, </if>
+			<if test="noticeContents !=null"> NOTICE_CONTENTS = #{noticeContents}, </if>
 			<if test="noticeDate !=null" > NOTICE_DATE = #{noticeDate}, </if>
 			<if test="noticeAttech !=null">NOTICE_ATTECH = #{noticeAttech},</if>
 			<if test="noticeDir !=null">NOTICE_DIR = #{noticeDir},</if>

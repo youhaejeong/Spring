@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>noticeInsertForm</title>
+
 </head>
+
 <body>
 <div align="center">
 	<div><h1>게시글 등록</h1></div>
@@ -49,9 +51,15 @@
 		</div>
 		</form>
 	</div>
-	
-	
 </div>
-
 </body>
+
+<!-- 그룹이벤트 생성(상세조회) -->
+<script>
+	let list =document.querySelector('tbody');
+	list.addEventListener('click',function(ev){
+		console.log(ev.target.parentNode.Children[0].textContent);
+	//	lication.href= 'getContent.do?noticeId='+ev.target
+	})
+	</script>
 </html>
