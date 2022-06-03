@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.yhj.service.BoardMapper">
+	<select id="boardSelectList" parameterType="co.micol.yhj.vo.BoardVO"
+				resultType="co.micol.yhj.vo.BoardVO">
+		SELECT * FROM BOARD ORDER BY BOARDNUM DESC
+	</select>
+	<select id="boardSelect" parameterType="co.micol.yhj.vo.BoardVO"
+			resultType="co.micol.yhj.vo.BoardVO">
+		SELECT * FROM BOARD WHERE BOARDNUM=${boardNum}
+	</select>
+	
+	<insert id="boardInsert" parameterType="co.micol.yhj.vo.BoardVO">
+		<selectKey resultType="int" keyProperty="boardNum" order="BEFORE">
+			SELECT CASE WHEN MAX(BOARDNUM) != 0 THEN MAX(BOARDNUM) + 1
+        		 ELSE 1 END AS ID FROM BOARD
+		</selectKey>
+		
+		INSERT INTO BOARD VALUES(${boardNum},${boardName},${boardTitle},${boardContent},${boardDate})
+	</insert>
+	
+	<update id="boardUpdate" parameterType="co.micol.yhj.vo.BoardVO">
+		UPDATE BOARD
+		<set>
+		<if test="boardName !=null">BOARDNAME = ${boardName}</if>
+		<if test="boardTitle !=null">BOARDTITLE = ${boardTitle}</if>
+		<if test="boardContent !=null">BOARDCONTENT = ${boardContent}</if>
+		</set>
+		WHERE BOARDNUM=${boardNum}
+	</update>
+	<delete id="boardDelete" parameterType="co.micol.yhj.vo.BoardVO">
+		DELETE FROM BOARD WHERE BOARDNUM=${boardNum}
+	</delete>
+
+
+</mapper>
