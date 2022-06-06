@@ -5,7 +5,7 @@ import java.util.List;
 import co.hr.yhj.vo.BoardVO;
 
 public interface BoardService {
-	List<BoardVO> boardSelectList();
+	List<BoardVO> boardSelectList(int state, String key);
 	BoardVO boardSelect(BoardVO vo);
 	int boardInsert(BoardVO vo);
 	int boardUpdate(BoardVO vo);

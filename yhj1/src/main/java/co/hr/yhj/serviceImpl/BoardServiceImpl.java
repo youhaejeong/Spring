@@ -14,12 +14,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private BoardMapper map;
-
+	
 	@Override
-	public List<BoardVO> boardSelectList() {
+	public List<BoardVO> boardSelectList(int state, String key) {
 		// TODO Auto-generated method stub
-		return map.boardSelectList();
+		return map.boardSelectList(state, key);
 	}
+
 
 
 	@Override
@@ -51,6 +52,8 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return map.boardHitUpdate(num);
 	}
+
+
 
 
 

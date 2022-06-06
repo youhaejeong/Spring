@@ -1,11 +1,15 @@
 package co.hr.yhj.web;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.hr.yhj.service.BoardService;
 import co.hr.yhj.vo.BoardVO;
@@ -17,7 +21,7 @@ public class BoardController {
 	
 	@RequestMapping("/boardList.do")
 	public String boardList(Model model) {
-		model.addAttribute("board", boardDao.boardSelectList());
+		model.addAttribute("board", boardDao.boardSelectList(1,"전체"));
 		return "board//boardList";
 	}
 	@RequestMapping("/boardInsertForm.do")
@@ -51,6 +55,11 @@ public class BoardController {
 	public String boardModify(BoardVO vo) {
 		boardDao.boardUpdate(vo);
 		return "redirect:boardList.do";
+	}
+	@PostMapping("/ajaxSelect.do")
+	@ResponseBody
+	public List<BoardVO> ajaxSelect(@RequestParam(value = "state") int state, @RequestParam("key") String key){
+		return boardDao.boardSelectList(state, key);
 	}
 	
 }
